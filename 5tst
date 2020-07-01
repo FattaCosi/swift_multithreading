@@ -1,0 +1,51 @@
+
+class MutexConditionTest {
+    private var condition = pthread_cond_t()
+    private var mutex = pthread_mutex_t()
+    private var check = false
+    
+    init() {
+        pthread_cond_init(&condition, nil)
+        pthread_mutex_init(&mutex, nil)
+    }
+    
+    func test1() {
+        print("MutexConditionTest - start")
+        pthread_mutex_lock(&mutex)
+        print("MutexConditionTest - lock")
+        while !check {
+            print("MutexConditionTest - !check - cycle loop")
+            pthread_cond_wait(&condition, &mutex)
+        }
+        
+        print("MutexConditionTest - DO SOME WORK")
+        pthread_mutex_unlock(&mutex)
+        print("MutexConditionTest - unlock")
+    }
+    
+    /// это должно выполняться из другого потока !!!
+    func test2() {
+        print("MutexConditionTest - test2() - start")
+        pthread_mutex_lock(&mutex)
+        print("MutexConditionTest - test2() - locked mutex")
+        check = true
+        pthread_cond_signal(&condition)
+        print("MutexConditionTest - test2() - unlocking mutex")
+        pthread_mutex_unlock(&mutex)
+        print("MutexConditionTest - test2() - end")
+    }
+}
+
+//Done: Тут какая-то бага
+
+let mutexConditionTest = MutexConditionTest()
+
+let thread1 = Thread {
+    mutexConditionTest.test1()
+}
+thread1.start()
+
+let thread2 = Thread {
+    mutexConditionTest.test2()
+}
+thread2.start()
