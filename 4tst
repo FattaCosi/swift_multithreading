@@ -1,0 +1,49 @@
+import Foundation
+
+class MutexConditionTest {
+    private var condition = pthread_cond_t()
+    private var mutex = pthread_mutex_t()
+    private var check = false
+
+    init() {
+        pthread_cond_init(&condition, nil)
+        pthread_mutex_init(&mutex, nil)
+    }
+
+    func test_1() {
+        print("\(#function) \(self) start")
+        pthread_mutex_lock(&mutex)
+        while check == false {
+            print("\(#function) \(self) while check")
+            pthread_cond_wait(&condition, &mutex)
+        }
+        // do something
+        print("\(#function) \(self) get signal")
+        pthread_mutex_unlock(&mutex)
+        print("\(#function) \(self) end")
+    }
+
+    func test_2() {
+        print("\(#function) \(self) start")
+        pthread_mutex_lock(&mutex)
+        check = true
+        pthread_cond_signal(&condition)
+        print("\(#function) \(self) send signal")
+        pthread_mutex_unlock(&mutex)
+        print("\(#function) \(self) end")
+    }
+}
+
+let mutexConditionTest = MutexConditionTest()
+
+// создаем свою очередь
+var queue_1 = DispatchQueue(label: "com.condition.serialQueue_1")
+
+// описываем разные потоки
+let threads_1: [Thread] = [
+    .init { mutexConditionTest.test_1() },
+    .init { mutexConditionTest.test_2() },
+]
+
+// выполняем работу из очереди в разных потоках
+threads_1.forEach { thread in queue_1.sync { thread.start() } }
