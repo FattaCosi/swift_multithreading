@@ -1,0 +1,8 @@
+class ConcurrentPerformTest {
+    func test() {
+        DispatchQueue.concurrentPerform(iterations: 3, execute: { i in
+            print(i)
+        
+        })
+    }
+}
