@@ -1,0 +1,6 @@
+
+
+class QueueTest2{
+    private let globalQueue = DispatchQueue.global()
+    private let mainQueue = DispatchQueue.main
+}
