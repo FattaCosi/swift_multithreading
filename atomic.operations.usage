@@ -1,0 +1,12 @@
+import Foundation
+class AtomicOperationsTest {
+    private var i: Int64 = 0
+    func test() {
+        OSAtomicCompareAndSwap64Barrier(i, 10, &i)
+        OSAtomicAdd64Barrier(20, &i)
+        OSAtomicIncrement64Barrier(&i)
+
+    }
+}
+
+
