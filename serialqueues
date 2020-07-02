@@ -1,0 +1,5 @@
+class QueueTest1{
+    private let serialQueue = DispatchQueue(label: "serialTest")
+    private let concurrentQueue = DispatchQueue(label: "concurrentTest",
+                                                attributes: .concurrent)
+}
