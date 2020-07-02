@@ -1,0 +1,19 @@
+class DeadLockTest {
+    private let lock1 =
+    NSLock()
+    private let lock2 =
+    NSLock()
+    var resourceA = false
+    var resourceB = false
+}
+
+let thread1 = Thread(block: {               let thread2 = Thread(block: {
+    self.lock1.lock()                       self.lock2.lock()
+    self.resourceA = true                   self.resourceB = true
+    self.lock2.lock()                       self.lock1.lock()
+    self.resourceB = true                   self.resourceA = true
+    self.lock2.unlock()                     self.lock1.unlock()
+    self.lock1.unlock()                     self.lock2.unlock()
+})                                          })
+thread1.start()                             thread2.start()
+ 
