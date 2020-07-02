@@ -1,0 +1,20 @@
+import Foundation
+class  {
+    private let concurrentQueue = DispatchQueue.global()
+
+    func testConcurrentt(){
+        concurrentQueue.async{
+            print("test1")
+        
+        }AsyncVsSyncTest2
+         concurrentQueue.async{
+            print("test2")
+        }
+      concurrentQueue.sync{
+            print("test3")
+        }
+         concurrentQueue.sync{
+            print("test4")
+        }
+    }
+}
