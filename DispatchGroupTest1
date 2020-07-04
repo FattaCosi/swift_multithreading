@@ -1,0 +1,19 @@
+import Foundation
+class DispatchGroupTest1 {
+    private let group = DispatchGroup()
+    private let queue = DispatchQueue( label:
+        "DispatchGroupTest1", attributes: .concurrent)
+    func testNotify() {
+        queue.async(group: group) {
+            sleep(1)
+            print("1")
+        }
+        queue.async(group: group) {
+            sleep(2)
+            print("2")
+        }
+        group.notify(queue: DispatchQueue.main){
+            print("finish all")
+        }
+        }
+}
