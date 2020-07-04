@@ -1,0 +1,15 @@
+class DispatchWorkItemTest1 {
+    private let queue = DispatchQueue (label: "DispatchWorkItemTest1",
+                                       attributes: .concurrent)
+    func testNotify(){
+        let item = DispatchWorkItem{
+            print("test")
+        }
+        item.notify(queue: DispatchQueue.main, execute: {
+            print("finish")
+    })
+        queue.async(execute: item)
+
+    }
+    
+}
