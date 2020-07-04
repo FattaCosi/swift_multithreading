@@ -1,0 +1,13 @@
+import Foundation
+class SemaphoreTest {
+    private let semaphore = DispatchSemaphore(value: 0)
+    func test(){
+        DispatchQueue.global().async{
+            sleep(3)
+            print("1")
+            self.semaphore.signal()
+        }
+        semaphore.wait()
+        print("2")
+        }
+    }
