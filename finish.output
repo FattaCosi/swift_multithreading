@@ -1,0 +1,15 @@
+
+import Foundation
+let serialQueue = DispatchQueue(label: "serialQueue")
+let item = DispatchWorkItem {
+     print("test")
+}
+item.notify(queue: serialQueue) {
+     print("finish")
+}
+serialQueue.async {
+     sleep(1)
+}
+serialQueue.async(execute: item)
+item.cancel()
+
