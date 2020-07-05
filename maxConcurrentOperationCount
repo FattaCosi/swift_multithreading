@@ -1,0 +1,22 @@
+import Foundation
+class OperationCountTest {
+    private let operationQueue = OperationQueue()
+    
+    func test() {
+        operationQueue.maxConcurrentOperationCount = 1
+        operationQueue.addOperation {
+            
+            sleep(1)
+            print("test1")
+        }
+        operationQueue.addOperation {
+            sleep(1)
+            print("test2")
+    }
+        operationQueue.addOperation {
+            
+            sleep(1)
+            print("test3")
+        }
+}
+}
