@@ -1,0 +1,11 @@
+import Foundation
+class BlockOperationTest {
+    private let operationQueue = OperationQueue()
+    func test() {
+        let blockOperation = BlockOperation {
+            print("test")
+        }
+        operationQueue.addOperation(blockOperation)
+        
+        }
+    }
