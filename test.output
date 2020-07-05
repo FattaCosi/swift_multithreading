@@ -1,0 +1,15 @@
+class TestOperation: Operation {
+ 
+   override func main() {
+ 
+      sleep(2)
+      print("test")
+   }
+}
+ 
+ let operationQueue = OperationQueue()
+ 
+ let testOperation = TestOperation()
+ operationQueue.addOperation(testOperation)
+ sleep(1)
+ testOperation.cancel()
