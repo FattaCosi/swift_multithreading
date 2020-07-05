@@ -1,0 +1,27 @@
+import Foundation
+class GcdChannelTest {
+private let queue = DispatchQueue(label: "GcdChannelTest",
+                                  attributes: .concurrent)
+private var channel: DispatchIO?
+
+func test() {
+    
+    guard let filePath = Bundle.main.path(forResource: "test", ofType: "") else
+    { return }
+    channel = DispatchIO (__type: DispatchIO.StreamType.stream.rawValue,path:
+        filePath, oflag: O_RDONLY, mode: 0, queue: DispatchQueue.global(), handler: { error i
+            //Handle error
+            
+    })
+    channel?.read(offset: 0, length: Int.max, queue: queue)
+    { done, data, error)
+        in
+        if data !=nil {
+            //Handle data
+        }
+        if error!= 0 {
+            //Handle error
+        }
+        }
+        }
+}
