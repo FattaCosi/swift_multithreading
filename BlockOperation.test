@@ -1,0 +1,12 @@
+let operationQueue = OperationQueue()
+ 
+let operation1 = BlockOperation { print("test1") }
+let operation2 = BlockOperation { print("test2") }
+let operation3 = BlockOperation { print("test3") }
+ 
+operation3.addDependency(operation2)
+ 
+operationQueue.addOperations([operation1, operation2, operation3], waitUntilFinished: false)
+//output test2, test3, test1
+//test1, test2, test3
+//test2, test1, test3
