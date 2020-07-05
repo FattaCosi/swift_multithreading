@@ -1,0 +1,15 @@
+import Foundation
+class DispatchSourceTest2 {
+private let source = DispatchSource.makeUserDataAddSource(queue:DispatchQueue.main)
+    init() {
+        source.activate()
+    }
+    func test(){
+        DispatchQueue.global().async {
+            self.source.add(data: 10)
+            
+        }
+        
+    }
+}
+
