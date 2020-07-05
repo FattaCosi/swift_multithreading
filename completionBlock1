@@ -1,0 +1,16 @@
+import Foundation
+let operationQueue = OperationQueue()
+ 
+let operation = BlockOperation {
+    print("test")
+    sleep(2)
+}
+ 
+operation.completionBlock = {
+    print("finish")
+}
+ 
+operationQueue.addOperation(operation)
+sleep(1)
+operation.cancel()
+// test finish output
