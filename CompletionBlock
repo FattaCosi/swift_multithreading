@@ -1,0 +1,16 @@
+import Foundation
+class CompletionBlockTest {
+    
+    private let operationQueue = OperationQueue()
+    
+    func test() {
+        
+        let operation = BlockOperation {
+            print("test")
+        }
+        operation.completionBlock = {
+            print("finish")
+        }
+        operationQueue.addOperation(operation)
+    }
+}
