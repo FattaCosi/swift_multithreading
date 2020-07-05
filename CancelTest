@@ -1,0 +1,23 @@
+import Foundation
+class CancelTest {
+    private let operationQueue = OperationQueue()
+    
+    class OperationCancelTest: Operation {
+        override func main() {
+            if isCancelled {
+                return
+            }
+            sleep(1)
+            if isCancelled {
+                return
+            }
+            print("test")
+        }
+    }
+    
+    func test() {
+        let cancelOperation = OperationCancelTest()
+        operationQueue.addOperation(cancelOperation)
+        cancelOperation.cancel()
+        }
+    }
