@@ -1,0 +1,18 @@
+import Foundation
+class WaitOperationsTest2 {
+    private let operationQueue = OperationQueue()
+    
+    func test() {
+        let operation1 = BlockOperation{
+            
+            sleep(1)
+            print("test1")
+        }
+        let operation2 = BlockOperation {
+            
+            sleep(2)
+            print("test2")
+        }
+        operationQueue.addOperations([operation1, operation2], waitUntilFinished: true)
+    }
+}
