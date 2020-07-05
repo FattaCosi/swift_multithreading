@@ -1,0 +1,8 @@
+let operationQueue = OperationQueue()
+ 
+let operation1 = BlockOperation { print("test1") }
+let operation2 = BlockOperation { print("test2") }
+ 
+operationQueue.addOperations([operation1, operation2], waitUntilFinished: true)
+ 
+operationQueue.isSuspended = true
