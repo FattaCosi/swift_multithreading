@@ -1,0 +1,10 @@
+var operationQueue1: OperationQueue? = OperationQueue()
+let operationQueue2 = OperationQueue()
+
+var int = 1
+let operation = BlockOperation { print(int); int += 1; sleep(1) }
+
+operationQueue1?.addOperation(operation)
+operation.cancel()
+operationQueue1 = nil
+operationQueue2.addOperation(operation)
