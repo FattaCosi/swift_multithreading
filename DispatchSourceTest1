@@ -1,0 +1,12 @@
+import Foundation
+class DispatchSourceTest1 {
+    private let source = DispatchSource.makeTimerSource()
+    func test() {
+        source.setEventHandler {
+            print("test")
+        }
+        source.schedule(deadline: .now(), repeating: 5)
+        source.activate()
+    }
+        
+    }
