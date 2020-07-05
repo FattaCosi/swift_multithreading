@@ -1,0 +1,8 @@
+class OperationTest2 {
+    private let operationQueue = OperationQueue()
+    func test() {
+        operatonQueue.addOperation {
+            print("test2")
+        }
+    }
+}
